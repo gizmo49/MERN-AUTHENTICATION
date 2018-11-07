@@ -1,0 +1,17 @@
+.navbar-brand a span{
+  padding: 24px;
+
+}
+.form-signin {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  margin: auto;
+}
+.form-control{
+  margin-bottom: 24px;
+  border-radius: none;
+}
+.hidden{
+  display: none;
+}

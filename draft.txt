@@ -1,0 +1,11 @@
+APIs
+Authenticate users
+Middlewares
+Give users the ability to create events
+    Event Fields 
+        Date 
+        Time
+        Location
+Give users ability to declare interest in an events
+
+Query for all available events
