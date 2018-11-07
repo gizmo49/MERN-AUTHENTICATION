@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Navbar from './Navbar';
+import { error } from 'util';
 const Logouturl = `http://localhost:3027/users/logout`;
 
 
@@ -9,14 +10,17 @@ const Logouturl = `http://localhost:3027/users/logout`;
 class Events extends Component {
   constructor(){
     super();
-    this.state = {auth: "false"};
+    this.state = {auth: "false", fullname: ""};
   }
   componentWillMount(){
     const accesstoken = Cookies.get('x-access-token');
     const url =  `http://localhost:3027/users/verify`;
+  //  const getuser = `http://localhost:3027/users/verify`;
     axios.post(url,{accesstoken})
         .then((res) => {
           console.log(res.data.id);
+          this.setState({fullname: res.data.fullname});
+        
         
         }).catch((err) => {
             console.log('something went wrong');
@@ -47,6 +51,7 @@ class Events extends Component {
         </div>
           <div>
          <h1>Events Page</h1>
+         <h1>Welcome {this.state.fullname}</h1>
         </div>
          </div>
     

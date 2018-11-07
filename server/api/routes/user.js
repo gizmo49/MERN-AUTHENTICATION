@@ -37,7 +37,7 @@ router.post('/login', function(req, res) {
       var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
       if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
 
-      var token = jwt.sign({ id: user._id, email: user.email, password:user.password }, config.secret, {
+      var token = jwt.sign({ id: user._id, email: user.email, fullname: user.fullname }, config.secret, {
         expiresIn: 86400 // expires in 24 hours
       });
       res.status(200).send({ auth: true, token: token });
@@ -60,19 +60,20 @@ router.post('/verify', function(req,res){
   }
     
 });
-router.post('/me', VerifyToken , function(req, res) {
-    var token = req.headers['x-access-token'];
-    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-    
-    jwt.verify(token, config.secret, function(err, decoded) {
-      if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-      
-      res.status(200).send(decoded);
-    });
-  });
+router.post('/getuser', function(req,res){
+
+   //res.status(200).json(req.body);
+   User.findById(req.body.userid).then((result) => {
+    res.status(200).json(result);
+  }).catch((error) => {
+    res.status(404).json('error finding user');
+  })
+
+})
 
 router.get('/logout', function(req, res) {
-    res.status(200).send({ auth: false, token: null });
+  res.status(200).send({ auth: false, token: null });
+  
 });
 
 
