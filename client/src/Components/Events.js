@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import Navbar from './Navbar';
+const Logouturl = `http://localhost:3027/users/logout`;
+
 
 
 class Events extends Component {
@@ -8,7 +11,7 @@ class Events extends Component {
     super();
     this.state = {auth: "false"};
   }
-  componentDidMount(){
+  componentWillMount(){
     const accesstoken = Cookies.get('x-access-token');
     const url =  `http://localhost:3027/users/verify`;
     axios.post(url,{accesstoken})
@@ -21,13 +24,30 @@ class Events extends Component {
         })
    
     }
-  
+    LoguserOut(e){
+      axios.get(Logouturl)
+      .then((res) => {
+        Cookies.remove('x-access-token');
+        console.log('deleting the users');
+        this.setState({auth:false});
+        this.props.history.push("/");
+        this.forceUpdate();
+      
+      }).catch((err) => {
+          //comsole.log('so')
+            console.log('something went wrong');
+         
+      })
+    }
   render() {
     return (
         <div className="container">
-
+        <div>
+         <Navbar updateauth={this.LoguserOut.bind(this)} authstatus={ this.state.auth }></Navbar>          
+        </div>
+          <div>
          <h1>Events Page</h1>
-
+        </div>
          </div>
     
     );

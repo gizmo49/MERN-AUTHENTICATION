@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import Navbar from './Navbar';
 import axios from 'axios';
 const Cookies = require('js-cookie');
+const Logouturl = `http://localhost:3027/users/logout`;
 const appurl = `http://localhost:3027/users/signup`;
+
 
 class Home extends Component {
   constructor(props) {
@@ -26,10 +29,15 @@ class Home extends Component {
         
         }).catch((err) => {
             console.log('something went wrong');
+            this.setState({auth:false});
           //  this.props.history.push("/login");
         })
    
     }
+    componentWillMount(){
+      console.log('real new mount');
+    }
+   
   
   handleChange(event) {
 
@@ -46,6 +54,7 @@ class Home extends Component {
       .then(res => {
         console.log('got a response');
         console.log(res);
+        this.props.history.push("/login");
 
         console.log(res.data);
       }).catch((err) =>{
@@ -55,10 +64,28 @@ class Home extends Component {
 
       
   }
+  LoguserOut(e){
+    axios.get(Logouturl)
+    .then((res) => {
+      Cookies.remove('x-access-token');
+      console.log('deleting the users');
+      this.setState({auth:false});
+      this.props.history.push("/events");
+      this.forceUpdate();
+    
+    }).catch((err) => {
+        //comsole.log('so')
+          console.log('something went wrong');
+       
+    })
+  }
 
   render() {
     return (
      <div>
+       <div>
+       <Navbar updateauth={this.LoguserOut.bind(this)} authstatus={ this.state.auth }></Navbar>
+       </div>
       <div className={ (this.state.auth ? 'hidden' : 'container')}>
        <form className="form-signin" onSubmit={this.handleSubmit}> 
           <h1 className="h3 mb-3 font-weight-normal">Signup for an Account</h1>

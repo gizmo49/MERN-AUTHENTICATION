@@ -47,6 +47,7 @@ router.post('/login', function(req, res) {
 router.post('/verify', function(req,res){
      var token = req.body.accesstoken;
   //return res.status(200).json(req.body.accesstoken);
+  if(token){
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
     
     jwt.verify(token, config.secret, function(err, decoded) {
@@ -54,6 +55,9 @@ router.post('/verify', function(req,res){
       
       res.status(200).send(decoded);
     });
+  }else{
+    res.status(404).json('no token cookie found');
+  }
     
 });
 router.post('/me', VerifyToken , function(req, res) {

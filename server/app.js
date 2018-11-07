@@ -46,11 +46,6 @@ app.use((req,res,next) => {
 
 });
 
-// initialize cookie-parser to allow us access the cookies stored in the browser. 
-
-
-// initialize express-session to allow us track the logged-in user across sessions.
-
 app.use(bodyPaser.urlencoded({extended:false}));
 app.use(bodyPaser.json());
 
