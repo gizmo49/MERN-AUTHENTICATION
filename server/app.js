@@ -1,5 +1,6 @@
 const express = require('express');
 const userRoutes = require('./api/routes/user');
+const eventsRoutes = require ('./api/routes/events');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 //const jwt = require('jsonwebtoken');
@@ -50,6 +51,7 @@ app.use(bodyPaser.urlencoded({extended:false}));
 app.use(bodyPaser.json());
 
 app.use('/users', userRoutes);
+app.use('/events', eventsRoutes);
 
 
 

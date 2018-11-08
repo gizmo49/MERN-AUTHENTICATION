@@ -98,7 +98,7 @@ class Home extends Component {
 
 
         <button className="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
-          <p className="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+          {/* <p className="mt-5 mb-3 text-muted">&copy; 2017-2018</p> */}
         </form>
        </div>
        <div className="container">

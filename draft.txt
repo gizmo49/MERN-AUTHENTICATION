@@ -1,11 +1,14 @@
-APIs
-Authenticate users
-Middlewares
+APIs - check
+Authenticate users - check
+Middlewares - check
 Give users the ability to create events
     Event Fields 
+        Theme
         Date 
         Time
-        Location
+        Venue 
+    Show People Attending your Event
 Give users ability to declare interest in an events
+    Mark Attending 
 
 Query for all available events

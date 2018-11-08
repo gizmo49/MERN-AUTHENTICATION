@@ -60,16 +60,16 @@ router.post('/verify', function(req,res){
   }
     
 });
-router.post('/getuser', function(req,res){
+// router.post('/getuser', function(req,res){
 
-   //res.status(200).json(req.body);
-   User.findById(req.body.userid).then((result) => {
-    res.status(200).json(result);
-  }).catch((error) => {
-    res.status(404).json('error finding user');
-  })
+//    //res.status(200).json(req.body);
+//    User.findById(req.body.userid).then((result) => {
+//     res.status(200).json(result);
+//   }).catch((error) => {
+//     res.status(404).json('error finding user');
+//   })
 
-})
+// })
 
 router.get('/logout', function(req, res) {
   res.status(200).send({ auth: false, token: null });

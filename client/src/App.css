@@ -2,11 +2,21 @@
   padding: 24px;
 
 }
+.card{
+  margin-bottom: 50px;
+}
 .form-signin {
   width: 100%;
   max-width: 400px;
   padding: 15px;
   margin: auto;
+}
+.form-event{
+  width: 100%;
+  max-width: 600px;
+  padding: 15px;
+  margin: auto;
+
 }
 .form-control{
   margin-bottom: 24px;
